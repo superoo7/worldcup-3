@@ -1,0 +1,7 @@
+node_modules/
+output.json
+t.js
+dist/
+node_modules/
+.env
+*.swp
