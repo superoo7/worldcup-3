@@ -1,3 +1,5 @@
+import {} from 'jest'
+
 import { postData } from './type'
 import { checkUnique } from './function'
 
@@ -30,6 +32,5 @@ describe('test function', () => {
 
     expect(res.violated.length).toEqual(1)
     expect(res.violated[0]).toEqual('a')
-    expect(res.data.length).toEqual(0)
   })
 })

@@ -9,7 +9,7 @@ SELECT
   Comments.json_metadata,
   Comments.created,
   Comments.last_update,
-  'https://steemit.com/' + Comments.parent_permlink + '@' + Comments.author + '/' + Comments.permlink  as url,
+  'https://steemit.com/' + Comments.parent_permlink + '/@' + Comments.author + '/' + Comments.permlink  as url,
   Comments.body
 FROM Comments
 LEFT JOIN Accounts ON Comments.author = Accounts.name

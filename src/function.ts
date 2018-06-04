@@ -20,19 +20,19 @@ const checkUnique: (data: postData[]) => { violated: string[]; data: postData[] 
     }
   })
 
-  let res = nd.filter(d => {
-    if (violated.indexOf(d.author) < 0) {
-      return true
-    } else {
-      return false
-    }
-  })
+  // let res = nd.filter(d => {
+  //   if (violated.indexOf(d.author) < 0) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // })
 
-  logger.info('res:')
-  logger.info(res.length)
+  // logger.info('res:')
+  // logger.info(res.length)
   return {
     violated: violated,
-    data: res
+    data: data
   }
 }
 
