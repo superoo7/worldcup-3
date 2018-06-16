@@ -17,7 +17,8 @@ WHERE
   Comments.depth = '0' AND
   CONTAINS(Comments.json_metadata, 'blocktradesworldcup') AND
   CONTAINS(Comments.json_metadata, 'mypicks') AND
-  Comments.last_update < '2018/06/14'
+  Comments.created < '2018-06-14 18:00:00' AND
+  Comments.last_update < '2018-06-14 18:00:00'
 `
 
 const getData: () => any = async () => {

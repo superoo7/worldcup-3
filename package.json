@@ -22,8 +22,9 @@
   "version": "1.0.0",
   "main": "test.js",
   "scripts": {
+    "comment": "concurrently \"tsc -w\" \"nodemon dist/comment/index.js\"",
     "dev": "concurrently \"tsc -w\" \"nodemon dist/index.js\"",
-    "test": "concurrently \"tsc -w\" \"jest --watchAll\""
+    "test": "NODE=TEST concurrently \"tsc -w\" \"jest --watchAll\""
   },
   "keywords": [],
   "author": "",

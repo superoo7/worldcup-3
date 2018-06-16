@@ -1,5 +1,3 @@
-import {} from 'jest'
-
 import { postData } from './type'
 import { checkUnique } from './function'
 

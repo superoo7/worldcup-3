@@ -1,23 +1,40 @@
 import { postData, extractedData, country, match } from './type'
 import { logger } from '.'
 
-const extractMain: (data: postData[]) => { violated: string[]; data: postData[] } = (
+const extractMain: (
   data: postData[]
-) => {
-  let violated: string[] = []
-  let nd = data.map(d => {
-    // make everything lower case for the ease of developing
-    let body = d.body.toLowerCase()
-    let nb: extractedData
-    try {
-      nb = extractBody(body)
-      d.match = nb
-    } catch (err) {
-      logger.error(err)
-      violated.push(d.url)
-      d.match = []
+) => Promise<{ violated: postData[]; data: postData[] }> = async (data: postData[]) => {
+  let violated: postData[] = []
+
+  let nd = data
+    .map(d => {
+      // make everything lower case for the ease of developing
+      let body = removeDecoration(d.body.toLowerCase())
+
+      let nb: extractedData
+      try {
+        nb = extractBody(body)
+        d.match = nb
+      } catch (err) {
+        // logger.error(d.url)
+        // logger.error(err)
+        d.match = []
+        d.error = `${err}`
+        violated.push(d)
+      } finally {
+        return d
+      }
+    })
+    .filter(d => !d.error)
+
+  nd = nd.filter(d => {
+    //@ts-ignore
+    if (d.match.every(i => i === 'o')) {
+      violated.push(d)
+      return false
+    } else {
+      return true
     }
-    return d
   })
 
   return { violated: violated, data: nd }
@@ -28,8 +45,7 @@ const extractBody: (body: string) => extractedData = (body: string) => {
   // Russia and Saudi Arab first
   let tempChunk = body
     .toLowerCase()
-    .split(/[t,w,l]+[* |]+russia+[ |]+[v, vs]+[ |]+saudi arabia+[* |]+[l,w,t]/)[0]
-
+    .split(/[t,w,l]+[* |\t]+russia+[*| \t]+[v, vs]+[* |\t]+saudi arabia+[* |\t]+[l,w,t]/)[0]
   let tempBody: string = body.toLowerCase().slice(tempChunk.length, body.length)
 
   // create a for loop of 48 times (48 matches)
@@ -57,7 +73,7 @@ const eachCountryFilter = (filteredBody: string, firstCountry: string, secondCou
   // get the first country location
   let tempLoc1 = filteredBody.match(firstCountry)
   if (!tempLoc1 || typeof tempLoc1.index !== 'number') {
-    console.log(firstCountry)
+    // console.log(firstCountry)
     throw 'COUNTRY_NOT_FOUND_1'
   }
   // Get the first country condition
@@ -70,7 +86,8 @@ const eachCountryFilter = (filteredBody: string, firstCountry: string, secondCou
   // Get the second country location
   let tempLoc2 = chunkB.match(secondCountry)
   if (!tempLoc2 || typeof tempLoc2.index !== 'number') {
-    console.log(secondCountry)
+    // console.log(firstCountry)
+    // console.log(secondCountry)
     throw 'COUNTRY_NOT_FOUND_2'
   }
   // Get the second country condition
@@ -79,20 +96,18 @@ const eachCountryFilter = (filteredBody: string, firstCountry: string, secondCou
   secondCond = findRes(chunkC, false)
 
   // Check condition
-  if (firstCond === 't' && secondCond === 't') {
+  if ((firstCond === 't' && secondCond === 't') || (firstCond === 'd' && secondCond === 'd')) {
     finalCond = 't'
   } else if (firstCond === 'w' && secondCond === 'l') {
     finalCond = 'w'
   } else if (firstCond === 'l' && secondCond === 'w') {
     finalCond = 'l'
   } else {
-    console.log(firstCountry)
-    console.log(secondCountry)
-    console.log(firstCond)
-    console.log(secondCond)
-    // console.log(chunkA)
-    // console.log(chunkB)
-    throw 'INVALID_LOGIC_OF_COND'
+    // console.log(firstCountry)
+    // console.log(secondCountry)
+    // console.log(firstCond)
+    // console.log(secondCond)
+    finalCond = 'o'
   }
 
   return {
@@ -108,7 +123,13 @@ const findRes: (chunk: string, reverse?: boolean) => string = (
   if (reverse) {
     let revArr = chunk.split('').reverse()
     for (let i = 0; i < revArr.length; i++) {
-      if (revArr[i] === 't' || revArr[i] === 'w' || revArr[i] === 'l') {
+      // >dt< >dt/<
+      if (
+        revArr[i] === 't' &&
+        i !== revArr.length - 1 &&
+        (revArr[i + 1] === '/' || revArr[i + 1] === '<')
+      ) {
+      } else if (revArr[i] === 't' || revArr[i] === 'd' || revArr[i] === 'w' || revArr[i] === 'l') {
         return revArr[i]
       }
     }
@@ -116,7 +137,9 @@ const findRes: (chunk: string, reverse?: boolean) => string = (
   } else {
     let arr = chunk.split('')
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i] === 't' || arr[i] === 'w' || arr[i] === 'l') {
+      // <td> </td>
+      if (arr[i] === 't' && i !== arr.length - 1 && arr[i + 1] === 'd') {
+      } else if (arr[i] === 't' || arr[i] === 'd' || arr[i] === 'w' || arr[i] === 'l') {
         return arr[i]
       }
     }
@@ -124,5 +147,21 @@ const findRes: (chunk: string, reverse?: boolean) => string = (
   }
 }
 
+const removeDecoration = (body: string) => {
+  // remove **
+  let res = body
+    .split('')
+    .filter((s: string) => !s.match(/[\*\_]/))
+    .join('')
+
+  // remove table
+  res = res
+    .split(/<[^>]*>/)
+    .filter((s: string) => !s.match(/<[^>]*>/))
+    .join(' ')
+
+  return res
+}
+
 export default extractMain
-export { extractBody, eachCountryFilter, findRes }
+export { extractBody, eachCountryFilter, findRes, removeDecoration } // extractPromise }

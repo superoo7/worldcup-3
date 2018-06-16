@@ -9,9 +9,10 @@ type postData = {
   url: string
   body: string
   match?: extractedData
+  error?: string
 }
 
-type match = 'w' | 'l' | 't'
+type match = 'w' | 'l' | 't' | 'o'
 
 type extractedData = match[]
 
