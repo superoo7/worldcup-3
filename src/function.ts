@@ -4,11 +4,12 @@ import { calcRep } from './steem'
 import asyncForEach from './aync'
 
 // This funciton should return violated users that submitted multiple post
-const checkUnique: (data: postData[]) => { violated: string[]; data: postData[] } = (
+const checkUnique: (
   data: postData[]
-) => {
+) => { violated: string[]; data: postData[]; vArray: postData[] } = (data: postData[]) => {
   let tempArr: string[] = []
   let violated: string[] = []
+  let vArray: postData[] = []
 
   let nd = data.filter((d, key) => {
     if (tempArr.indexOf(data[key].author) < 0) {
@@ -16,6 +17,7 @@ const checkUnique: (data: postData[]) => { violated: string[]; data: postData[] 
       return true
     } else {
       violated.push(data[key].author)
+      vArray.push(d)
       return false
     }
   })
@@ -24,6 +26,7 @@ const checkUnique: (data: postData[]) => { violated: string[]; data: postData[] 
     if (violated.indexOf(d.author) < 0) {
       return true
     } else {
+      vArray.push(d)
       return false
     }
   })
@@ -32,6 +35,7 @@ const checkUnique: (data: postData[]) => { violated: string[]; data: postData[] 
   // logger.info(res.length)
   return {
     violated: violated,
+    vArray,
     data: res
   }
 }
