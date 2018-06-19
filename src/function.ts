@@ -22,7 +22,7 @@ const checkUnique: (
     }
   })
 
-  let res = nd.filter(d => {
+  let res = data.filter(d => {
     if (violated.indexOf(d.author) < 0) {
       return true
     } else {
