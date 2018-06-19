@@ -9,10 +9,11 @@ import * as steem from 'steem'
 
 // Files
 import getData from './sql'
-import { postData } from './type'
+import { postData, match } from './type'
 import { checkUnique, checkRep } from './function'
 import extractMain, { extractBody } from './extract'
 import { comment } from './steem'
+import { bubbleSort } from './algorithm'
 
 // Initialize
 dotenv.config()
@@ -91,13 +92,95 @@ function sendMessage(message: string, author: string, permlink: string) {
   comment(username, posting, author, permlink, newMessage, steem)
 }
 
+// winners ranking
+const getWinners = async () => {
+  // get result of matches
+  const country: match[] = [
+    'w', // 'Russia v Saudi Arabia',
+    'l', // 'Egypt v Uruguay',
+    'l', // 'Morocco v Iran',
+    't', // 'Portugal v Spain',
+    'w', // 'France v Australia',
+    't', // 'Argentina v Iceland',
+    'l', // 'Peru v Denmark',
+    'w', // 'Croatia v Nigeria',
+    'l', // 'Costa Rica v Serbia',
+    'l', // 'Germany v Mexico',
+    't', // 'Brazil v Switzerland',
+    'w', // 'Sweden v South Korea',
+    'w', // 'Belgium v Panama',
+    'l' // 'Tunisia v England',
+    // 'Poland v Senegal',
+    // 'l' // 'Colombia v Japan',
+    // 'Russia v Egypt',
+    // 'Portugal v Morocco',
+    // 'Uruguay v Saudi Arabia',
+    // 'Iran v Spain',
+    // 'France v Peru',
+    // 'Denmark v Australia',
+    // 'Argentina v Croatia',
+    // 'Brazil v Costa Rica',
+    // 'Nigeria v Iceland',
+    // 'Serbia v Switzerland',
+    // 'Belgium v Tunisia',
+    // 'Germany v Sweden',
+    // 'South Korea v Mexico',
+    // 'England v Panama',
+    // 'Japan v Senegal',
+    // 'Poland v Colombia',
+    // 'Uruguay v Russia',
+    // 'Saudi Arabia v Egypt',
+    // 'Spain v Morocco',
+    // 'Iran v Portugal',
+    // 'Denmark v France',
+    // 'Australia v Peru',
+    // 'Nigeria v Argentina',
+    // 'Iceland v Croatia',
+    // 'South Korea v Germany',
+    // 'Mexico v Sweden',
+    // 'Serbia v Brazil',
+    // 'Switzerland v Costa Rica',
+    // 'Japan v Poland',
+    // 'Senegal v Colombia',
+    // 'England v Belgium',
+    // 'Panama v Tunisia'
+  ]
+
+  const d = await fs.readFileSync('./result/approve.json', 'utf-8')
+  const data: postData[] = JSON.parse(d)
+  let res = data.map(d => {
+    d.points = 0
+    country.map((c, k) => {
+      if (!!d.match && c === d.match[k]) {
+        // If predicted
+        // @ts-ignore
+        d.points = d.points + 1
+      }
+    })
+  })
+
+  // Bubble sort algorithm
+  let finalData = await bubbleSort(data)
+  fs.writeFile('./ranking.json', JSON.stringify(finalData), () => {})
+  generateTable(finalData)
+}
+
+const generateTable = (data: postData[]) => {
+  let res = '|Author|URL|Points|\n|:---:|:---:|:---:|\n'
+  res += data
+    .reverse()
+    .map(d => `|@${d.author}|${d.url}|${d.points}|`)
+    .join('\n')
+  fs.writeFile('./currentResult.md', res, () => {})
+}
+
 // Start main
 
 if (process.env.NODE === 'TEST') {
 } else {
-  main()
+  // main()
+  // singlePost()
+  getWinners()
 }
-
-// singlePost()
 
 export { logger, client, readFile, sendMessage }

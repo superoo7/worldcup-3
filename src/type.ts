@@ -10,6 +10,7 @@ type postData = {
   body: string
   match?: extractedData
   error?: string
+  points?: number
 }
 
 type match = 'w' | 'l' | 't' | 'o'
