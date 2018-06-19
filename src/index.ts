@@ -162,16 +162,17 @@ const getWinners = async () => {
   // Bubble sort algorithm
   let finalData = await bubbleSort(data)
   fs.writeFile('./ranking.json', JSON.stringify(finalData), () => {})
-  generateTable(finalData)
+  generateTable(finalData.reverse())
 }
 
 const generateTable = (data: postData[]) => {
-  let res = '|Author|URL|Points|\n|:---:|:---:|:---:|\n'
-  res += data
-    .reverse()
-    .map(d => `|@${d.author}|${d.url}|${d.points}|`)
-    .join('\n')
-  fs.writeFile('./currentResult.md', res, () => {})
+  let resMd = '|Author|URL|Points|\n|:---:|:---:|:---:|\n'
+  resMd += data.map(d => `|@${d.author}|${d.url}|${d.points}|`).join('\n')
+  fs.writeFile('./currentResult.md', resMd, () => {})
+
+  let resCSV = 'Author,URL,Points\n'
+  resCSV += data.map(d => `${d.author},${d.url},${d.points}`).join('\n')
+  fs.writeFile('./currentResult.csv', resCSV, () => {})
 }
 
 // Start main
