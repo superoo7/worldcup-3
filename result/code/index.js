@@ -14,3 +14,23 @@ a.forEach(datas => {
 })
 
 fs.writeFileSync('./v1.txt', v1.map(datas => `@${datas}`).join(', '), () => {})
+
+const max = Math.max(approve.length, v1.length, v2.length, v3.length)
+console.log(max)
+
+let str = 'approve,v1,v2,v3\n'
+for (let i = 0; i < max; i++) {
+  str += `${gs(approve[i])},${gs(v1[i])},${gs(v2[i])},${gs(v3[i])}\n`
+}
+
+fs.writeFileSync('all.csv', str, () => {})
+
+function gs(arr) {
+  if (arr === undefined) {
+    return ''
+  } else if (arr.hasOwnProperty('author')) {
+    return arr.author
+  } else {
+    return arr
+  }
+}

@@ -2,6 +2,8 @@
 
 # Sample file
 
+The file is in result directory
+
 - `output.json`: Raw output from SteemSQL
 - `violated1.json`: Authors violated reputation < 35
 - `violated2.json`: Unable to extract data out from post
