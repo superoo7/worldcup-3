@@ -131,19 +131,19 @@ const getWinners = async () => {
     'w', // 'Uruguay v Russia',
     'w', // 'Saudi Arabia v Egypt',
     't', // 'Spain v Morocco',
-    't' // 'Iran v Portugal',
-    // 'Denmark v France',
-    // 'Australia v Peru',
-    // 'Nigeria v Argentina',
-    // 'Iceland v Croatia',
-    // 'South Korea v Germany',
-    // 'Mexico v Sweden',
-    // 'Serbia v Brazil',
-    // 'Switzerland v Costa Rica',
-    // 'Japan v Poland',
-    // 'Senegal v Colombia',
-    // 'England v Belgium',
-    // 'Panama v Tunisia'
+    't', // 'Iran v Portugal',
+    't', // 'Denmark v France',
+    'l', // 'Australia v Peru',
+    'l', // 'Nigeria v Argentina',
+    'l', // 'Iceland v Croatia',
+    'w', // 'South Korea v Germany',
+    'l', // 'Mexico v Sweden',
+    'l', // 'Serbia v Brazil',
+    't', // 'Switzerland v Costa Rica',
+    'l', // 'Japan v Poland',
+    'l', // 'Senegal v Colombia',
+    'l', // 'England v Belgium',
+    'l', // 'Panama v Tunisia'
   ]
 
   const d = await fs.readFileSync('./result/approve.json', 'utf-8')
