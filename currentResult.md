@@ -1,7 +1,5 @@
 |Author|URL|Points|
 |:---:|:---:|:---:|
-|@palomot|[post](https://steemit.com/blocktradesworldcup/@palomot/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|12|
-|@palomot|[post](https://steemit.com/blocktradesworldcup/@palomot/k1mzr-the-blocktrades-world-cup-or-my-selections-for-the-last-16)|12|
 |@biroreklame|[post](https://steemit.com/blocktradesworldcup/@biroreklame/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|12|
 |@alexicp|[post](https://steemit.com/blocktradesworldcup/@alexicp/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|12|
 |@bulent1976|[post](https://steemit.com/blocktradesworldcup/@bulent1976/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|12|
@@ -176,7 +174,6 @@
 |@lawlees|[post](https://steemit.com/blocktradesworldcup/@lawlees/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@kroby31|[post](https://steemit.com/blocktradesworldcup/@kroby31/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@jyoti-thelight|[post](https://steemit.com/blocktradesworldcup/@jyoti-thelight/the-blocktrades-world-cup-or-my-selections-for-the-last-16-my-entry)|7|
-|@josegregori|[post](https://steemit.com/blocktradesworldcup/@josegregori/la-copa-mundial-blocktrades-or-mis-predicciones-para-los-ultimos-16)|7|
 |@itchyfeetdonica|[post](https://steemit.com/blocktradesworldcup/@itchyfeetdonica/114-the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@giselacan|[post](https://steemit.com/blocktradesworldcup/@giselacan/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@giddyupngo|[post](https://steemit.com/blocktradesworldcup/@giddyupngo/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
@@ -231,7 +228,6 @@
 |@altafwani|[post](https://steemit.com/blocktradesworldcup/@altafwani/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@nzl19500|[post](https://steemit.com/blocktradesworldcup/@nzl19500/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@luis07|[post](https://steemit.com/blocktradesworldcup/@luis07/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
-|@josegregori|[post](https://steemit.com/blocktradesworldcup/@josegregori/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@ericet|[post](https://steemit.com/blocktradesworldcup/@ericet/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@apple96|[post](https://steemit.com/blocktradesworldcup/@apple96/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|7|
 |@javicabrera|[post](https://steemit.com/steempress/@javicabrera/theblocktradesworldcupmisseleccionesparalosltimos16-hw3w0u8u40)|7|
@@ -374,8 +370,6 @@
 |@zafiro.rosa|[post](https://steemit.com/blocktradesworldcup/@zafiro.rosa/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|6|
 |@wilhb81|[post](https://steemit.com/blocktradesworldcup/@wilhb81/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|6|
 |@tripleem|[post](https://steemit.com/blocktradesworldcup/@tripleem/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|6|
-|@summisimeon|[post](https://steemit.com/blocktradesworldcup/@summisimeon/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|6|
-|@summisimeon|[post](https://steemit.com/blocktradesworldcup/@summisimeon/2xyexv-the-blocktrades-world-cup-or-my-selections-for-the-last-16)|6|
 |@rigor|[post](https://steemit.com/blocktradesworldcup/@rigor/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|6|
 |@premier-league|[post](https://steemit.com/blocktradesworldcup/@premier-league/the-blocktrades-world-cup-or-my-selections-for-the-last-16-3ae30ea864a04)|6|
 |@poesteemit|[post](https://steemit.com/blocktradesworldcup/@poesteemit/the-world-cup-group-stage-finished-a-few-minutes-ago-and-we-already-know-the-matches-for-the-round-of-16-66093823a94f8)|6|
@@ -856,8 +850,6 @@
 |@ibeljr|[post](https://steemit.com/blocktradesworldcup/@ibeljr/the-blocktrades-world-cup-or-my-selections-for-the-last-16-6067e9293c3fc)|3|
 |@hrissm|[post](https://steemit.com/worldcup2018/@hrissm/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|3|
 |@hatoto|[post](https://steemit.com/blocktradesworldcup/@hatoto/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|3|
-|@harmen|[post](https://steemit.com/blocktradesworldcup/@harmen/the-polyester-world-cup-or-my-election-for-the-last-16-85ef721bc9a82)|3|
-|@harmen|[post](https://steemit.com/blocktradesworldcup/@harmen/the-polyester-world-cup-or-my-election-for-the-last-16-0f794cccf9948)|3|
 |@gusvzla|[post](https://steemit.com/blocktradesworldcup/@gusvzla/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|3|
 |@focusfit|[post](https://steemit.com/blocktradesworldcup/@focusfit/the-blocktrades-world-cup-or-my-selections-for-the-last-16)|3|
 |@farkparck|[post](https://steemit.com/blocktradesworldcup/@farkparck/blocktrades-world-cup-or-my-selections-for-the-last-16)|3|

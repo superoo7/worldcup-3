@@ -47,19 +47,18 @@ const main: () => void = async () => {
     logger.info(`Filtered left data: ${nd2.length}`)
     logger.info('================================================================================')
     fs.writeFile('./violated2.json', JSON.stringify(violated2), () => {})
-    fs.writeFile('./success.json', JSON.stringify(nd2), () => {})
 
-    // // #3 Check Uniqueness
-    // // Extracted the new data after removing duplicate entries
-    // let { violated: violated3, data: nd3, vArray } = checkUnique(nd2)
-    // logger.info('================================================================================')
-    // logger.info('Type: Check Unique Post')
-    // logger.info(`Total authors: ${violated3.length}`)
-    // logger.info(`Total posts: ${vArray.length}`)
-    // logger.info(`Filtered left data: ${nd3.length}`)
-    // logger.info('================================================================================')
-    // fs.writeFile('./violated3.json', JSON.stringify(vArray), () => {})
-    // fs.writeFile('./success.json', JSON.stringify(nd3), () => {})
+    // #3 Check Uniqueness
+    // Extracted the new data after removing duplicate entries
+    let { violated: violated3, data: nd3, vArray } = checkUnique(nd2)
+    logger.info('================================================================================')
+    logger.info('Type: Check Unique Post')
+    logger.info(`Total authors: ${violated3.length}`)
+    logger.info(`Total posts: ${vArray.length}`)
+    logger.info(`Filtered left data: ${nd3.length}`)
+    logger.info('================================================================================')
+    fs.writeFile('./violated3.json', JSON.stringify(vArray), () => {})
+    fs.writeFile('./success.json', JSON.stringify(nd3), () => {})
   }
 }
 
