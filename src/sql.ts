@@ -1,24 +1,25 @@
 import executeQuery from './db'
-import fs from 'fs'
+import * as fs from 'fs'
 
 const query = `
 SELECT
+  'https://steemit.com' + Comments.url AS link,
   Comments.author,
-  Accounts.reputation,
-  Comments.permlink,
-  Comments.json_metadata,
+  Comments.title,
   Comments.created,
   Comments.last_update,
-  'https://steemit.com/' + Comments.parent_permlink + '/@' + Comments.author + '/' + Comments.permlink  as url,
-  Comments.body
-FROM Comments
+  Comments.body,
+  Accounts.reputation
+FROM
+  Comments
 LEFT JOIN Accounts ON Comments.author = Accounts.name
 WHERE
-  Comments.depth = '0' AND
+  depth = 0 AND
+  Comments.created > '2018-06-28 20:26:03' AND
+  Comments.created < '2018-06-30 13:59:00' AND
+  Comments.last_update < '2018-06-30 13:59:00' AND
   CONTAINS(Comments.json_metadata, 'blocktradesworldcup') AND
-  CONTAINS(Comments.json_metadata, 'mypicks') AND
-  Comments.created < '2018-06-14 18:00:00' AND
-  Comments.last_update < '2018-06-14 18:00:00'
+  CONTAINS(Comments.json_metadata, 'mypicks')
 `
 
 const getData: () => any = async () => {

@@ -1,4 +1,4 @@
-import fs from 'fs'
+import * as fs from 'fs'
 
 import { logger, sendMessage } from '..'
 import { postData, extractedData } from '../type'

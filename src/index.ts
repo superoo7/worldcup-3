@@ -1,8 +1,8 @@
 // Library
 const steem = require('steem')
 const logger = require('winston')
-import dotenv from 'dotenv'
-import fs from 'fs'
+import * as dotenv from 'dotenv'
+import * as fs from 'fs'
 import { Client, DatabaseAPI } from 'dsteem'
 // @ts-ignore
 import * as steem from 'steem'
@@ -10,7 +10,7 @@ import * as steem from 'steem'
 // Files
 import getData from './sql'
 import { postData, match } from './type'
-import { checkUnique, checkRep } from './function'
+import { checkUnique, checkRep, checkTitle, removeDecoration } from './function'
 import extractMain, { extractBody } from './extract'
 import { comment } from './steem'
 import { bubbleSort } from './algorithm'
@@ -26,39 +26,41 @@ const main: () => void = async () => {
   if (getDataFromSQL) {
     await getData()
     logger.info('Get data from SteemSQL')
+  } else {
+    let data: [postData] = await readFile()
+    logger.info(`Amount of data: ${data.length}`)
+
+    // #1 Check reputation
+    let { violated: violated1, data: nd1 } = await checkRep(data)
+    logger.info('================================================================================')
+    logger.info('Type: Check Author Reputation')
+    logger.info(`Total author violated: ${violated1.length}`)
+    logger.info(`Filtered left data: ${nd1.length}`)
+    logger.info('================================================================================')
+    fs.writeFile('./violated1.json', JSON.stringify(violated1), () => {})
+
+    // #2 Extract out all matches prediction
+    let { violated: violated2, data: nd2 } = await extractMain(nd1)
+    logger.info('================================================================================')
+    logger.info('Type: Extracting Data')
+    logger.info(`Total author violated: ${violated2.length}`)
+    logger.info(`Filtered left data: ${nd2.length}`)
+    logger.info('================================================================================')
+    fs.writeFile('./violated2.json', JSON.stringify(violated2), () => {})
+    fs.writeFile('./success.json', JSON.stringify(nd2), () => {})
+
+    // // #3 Check Uniqueness
+    // // Extracted the new data after removing duplicate entries
+    // let { violated: violated3, data: nd3, vArray } = checkUnique(nd2)
+    // logger.info('================================================================================')
+    // logger.info('Type: Check Unique Post')
+    // logger.info(`Total authors: ${violated3.length}`)
+    // logger.info(`Total posts: ${vArray.length}`)
+    // logger.info(`Filtered left data: ${nd3.length}`)
+    // logger.info('================================================================================')
+    // fs.writeFile('./violated3.json', JSON.stringify(vArray), () => {})
+    // fs.writeFile('./success.json', JSON.stringify(nd3), () => {})
   }
-  let data: [postData] = await readFile()
-  logger.info(`Amount of data: ${data.length}`)
-
-  // #1 Check reputation
-  let { violated: violated1, data: nd1 } = await checkRep(data)
-  logger.info('================================================================================')
-  logger.info('Type: Check Author Reputation')
-  logger.info(`Total author violated: ${violated1.length}`)
-  logger.info(`Filtered left data: ${nd1.length}`)
-  logger.info('================================================================================')
-  fs.writeFile('./violated1.json', JSON.stringify(violated1), () => {})
-
-  // #2 Extract out all matches prediction
-  let { violated: violated2, data: nd2 } = await extractMain(nd1)
-  logger.info('================================================================================')
-  logger.info('Type: Extracting Data')
-  logger.info(`Total author violated: ${violated2.length}`)
-  logger.info(`Filtered left data: ${nd2.length}`)
-  logger.info('================================================================================')
-  fs.writeFile('./violated2.json', JSON.stringify(violated2), () => {})
-
-  // #3 Check Uniqueness
-  // Extracted the new data after removing duplicate entries
-  let { violated: violated3, data: nd3, vArray } = checkUnique(nd2)
-  logger.info('================================================================================')
-  logger.info('Type: Check Unique Post')
-  logger.info(`Total authors: ${violated3.length}`)
-  logger.info(`Total posts: ${vArray.length}`)
-  logger.info(`Filtered left data: ${nd3.length}`)
-  logger.info('================================================================================')
-  fs.writeFile('./violated3.json', JSON.stringify(vArray), () => {})
-  fs.writeFile('./success.json', JSON.stringify(nd3), () => {})
 }
 
 const readFile: () => [postData] = () => {
@@ -70,14 +72,14 @@ const readFile: () => [postData] = () => {
 
 // test a single post
 const singlePost = () => {
-  let url = `https://steemit.com/blocktradesworldcup/@bitpizza/the-blocktrades-world-cup-or-my-selections`
+  let url = `https://steemd.com/blocktradesworldcup/@neyi24/the-blocktrades-world-cup-or-my-selections-for-the-last-16`
   let author = url.split('/')[4]
   author = author.slice(1, author.length)
   let permlink = url.split('/')[5]
 
   steem.api.getContent(author, permlink, function(err: any, result: any) {
-    console.log(result.body)
-    let test = extractBody(result.body)
+    const body = result.body.toLowerCase()
+    let test = extractBody(body)
     logger.info(test)
   })
 }
@@ -96,63 +98,27 @@ function sendMessage(message: string, author: string, permlink: string) {
 const getWinners = async () => {
   // get result of matches
   const country: match[] = [
-    'w', // 'Russia v Saudi Arabia',
-    'l', // 'Egypt v Uruguay',
-    'l', // 'Morocco v Iran',
-    't', // 'Portugal v Spain',
-    'w', // 'France v Australia',
-    't', // 'Argentina v Iceland',
-    'l', // 'Peru v Denmark',
-    'w', // 'Croatia v Nigeria',
-    'l', // 'Costa Rica v Serbia',
-    'l', // 'Germany v Mexico',
-    't', // 'Brazil v Switzerland',
-    'w', // 'Sweden v South Korea',
-    'w', // 'Belgium v Panama',
-    'l', // 'Tunisia v England',
-    'l', // 'Poland v Senegal',
-    'l', // 'Colombia v Japan',
-    'w', // 'Russia v Egypt',
-    'w', // 'Portugal v Morocco',
-    'w', // 'Uruguay v Saudi Arabia',
-    'l', // 'Iran v Spain',
-    'w', // 'France v Peru',
-    't', // 'Denmark v Australia',
-    'l', // 'Argentina v Croatia',
-    'w', // 'Brazil v Costa Rica',
-    'w', // 'Nigeria v Iceland',
-    'l', // 'Serbia v Switzerland',
-    'w', // 'Belgium v Tunisia',
-    'w', // 'Germany v Sweden',
-    'l', // 'South Korea v Mexico',
-    'w', // 'England v Panama',
-    't', // 'Japan v Senegal',
-    'l', // 'Poland v Colombia',
-    'w', // 'Uruguay v Russia',
-    'w', // 'Saudi Arabia v Egypt',
-    't', // 'Spain v Morocco',
-    't', // 'Iran v Portugal',
-    't', // 'Denmark v France',
-    'l', // 'Australia v Peru',
-    'l', // 'Nigeria v Argentina',
-    'l', // 'Iceland v Croatia',
-    'w', // 'South Korea v Germany',
-    'l', // 'Mexico v Sweden',
-    'l', // 'Serbia v Brazil',
-    't', // 'Switzerland v Costa Rica',
-    'l', // 'Japan v Poland',
-    'l', // 'Senegal v Colombia',
-    'l', // 'England v Belgium',
-    'l', // 'Panama v Tunisia'
+    [4, 3, 'w'], // 'France vs Argentina'
+    [2, 1, 'w'], // 'Uruguay vs Portugal'
+    [1, 1, 't'], // 'Spain vs Russia'
+    [1, 1, 't'], // 'Croatia vs Denmark'
+    [2, 0, 'w'], // 'Brazil vs Mexico'
+    [3, 2, 'w'], // 'Belgium vs Japan'
+    [1, 0, 'w'], // 'Sweden vs Switzerland'
+    [1, 1, 't'] // 'Colombia vs England'
   ]
 
-  const d = await fs.readFileSync('./result/approve.json', 'utf-8')
+  const d = await fs.readFileSync('./success.json', 'utf-8')
   const data: postData[] = JSON.parse(d)
   let res = data.map(d => {
     d.points = 0
     country.map((c, k) => {
-      if (!!d.match && c === d.match[k]) {
-        // If predicted
+      if (!!d.match && c[0] === d.match[k][0] && c[1] === d.match[k][1]) {
+        // If predicted exact score
+        // @ts-ignore
+        d.points = d.points + 3
+      } else if (!!d.match && c[2] === d.match[k][2]) {
+        // If predicted win/lose cond
         // @ts-ignore
         d.points = d.points + 1
       }
@@ -167,11 +133,11 @@ const getWinners = async () => {
 
 const generateTable = (data: postData[]) => {
   let resMd = '|Author|URL|Points|\n|:---:|:---:|:---:|\n'
-  resMd += data.map(d => `|@${d.author}|[post](${d.url})|${d.points}|`).join('\n')
+  resMd += data.map(d => `|@${d.author}|[post](${d.link})|${d.points}|`).join('\n')
   fs.writeFile('./currentResult.md', resMd, () => {})
 
   let resCSV = 'Author,URL,Points\n'
-  resCSV += data.map(d => `${d.author},${d.url},${d.points}`).join('\n')
+  resCSV += data.map(d => `${d.author},${d.link},${d.points}`).join('\n')
   fs.writeFile('./currentResult.csv', resCSV, () => {})
 }
 

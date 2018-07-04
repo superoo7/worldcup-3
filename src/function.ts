@@ -56,4 +56,38 @@ const checkRep: (data: postData[]) => Promise<{ violated: string[]; data: postDa
   return { violated: violated, data: nd }
 }
 
-export { checkUnique, checkRep }
+// This function check title
+const checkTitle: (
+  data: postData[],
+  title: string
+) => { data: postData[]; violated: postData[] } = (data: postData[], title: string) => {
+  let res: postData[] = []
+  let violated: postData[] = []
+  data.map(d => {
+    if (title.match(d.title.toLowerCase())) {
+      res.push(d)
+    } else {
+      violated.push(d)
+    }
+  })
+
+  return { violated, data: res }
+}
+
+const removeDecoration = (body: string) => {
+  // remove **
+  let res = body
+    .split('')
+    .filter((s: string) => !s.match(/[\*\_]/))
+    .join('')
+
+  // remove table
+  res = res
+    .split(/<[^>]*>/)
+    .filter((s: string) => !s.match(/<[^>]*>/))
+    .join(' ')
+
+  return res
+}
+
+export { checkUnique, checkRep, checkTitle, removeDecoration }

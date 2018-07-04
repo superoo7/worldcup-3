@@ -4,6 +4,7 @@
     "dotenv": "^6.0.0",
     "dsteem": "^0.8.7",
     "mssql": "^4.1.0",
+    "remove-markdown": "^0.3.0",
     "steem": "^0.7.1",
     "winston": "^2.4.2"
   },
@@ -22,6 +23,7 @@
   "version": "1.0.0",
   "main": "test.js",
   "scripts": {
+    "sql": "tsc && data=true node dist/index.js",
     "comment": "concurrently \"tsc -w\" \"nodemon dist/comment/index.js\"",
     "dev": "concurrently \"tsc -w\" \"nodemon dist/index.js\"",
     "test": "NODE=TEST concurrently \"tsc -w\" \"jest --watchAll\""

@@ -8,20 +8,22 @@ describe('test function', () => {
         author: 'a',
         reputation: 123,
         permlink: 'aaa',
+        title: 'asd',
         json_metadata: '',
         created: '2018-05-31T23:20:06.000Z',
         last_update: '2018-05-31T23:20:06.000Z',
-        url: 'https://steemit.com',
+        link: 'https://steemit.com',
         body: 'test test test'
       },
       {
         author: 'a',
         reputation: 123,
         permlink: 'aaa',
+        title: 'asd',
         json_metadata: '',
         created: '2018-05-31T23:20:06.000Z',
         last_update: '2018-05-31T23:20:06.000Z',
-        url: 'https://steemit.com',
+        link: 'https://steemit.com',
         body: 'test test test'
       }
     ]
