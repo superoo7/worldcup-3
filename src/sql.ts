@@ -15,9 +15,9 @@ FROM
 LEFT JOIN Accounts ON Comments.author = Accounts.name
 WHERE
   depth = 0 AND
-  Comments.created > '2018-06-28 20:26:03' AND
-  Comments.created < '2018-06-30 13:59:00' AND
-  Comments.last_update < '2018-06-30 13:59:00' AND
+  Comments.created > '2018-07-03 21:18:12' AND
+  Comments.created < '2018-07-06 13:59:00' AND
+  Comments.last_update < '2018-07-06 13:59:00' AND
   CONTAINS(Comments.json_metadata, 'blocktradesworldcup') AND
   CONTAINS(Comments.json_metadata, 'mypicks')
 `

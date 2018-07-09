@@ -19,14 +19,10 @@ type match = (number | 'w' | 't' | 'l')[]
 type extractedData = match[]
 
 const country = [
-  'France vs Argentina', // France vs Argentina
-  'Uruguay vs Portugal', // Uruguay vs Portugal
-  'Spain vs Russia', // Spain vs Russia
-  'Croatia vs Denmark', // Croatia vs Denmark
-  'Brazil vs Mexico', // Brazil vs Mexico
-  'Belgium vs Japan', // Belgium vs Japan
-  'Sweden vs Switzerland', // Sweden vs Switzerland
-  'Colombia vs England' // Colombia vs England
+  'Uruguay vs France', // Uruguay vs France
+  'Brazil vs Belgium', // Brazil vs Belgium
+  'Sweden vs England', // Sweden vs England
+  'Russia vs Croatia' //  Russia vs Croatia
 ]
 
 export { postData, extractedData, match, country }

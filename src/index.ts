@@ -97,14 +97,11 @@ function sendMessage(message: string, author: string, permlink: string) {
 const getWinners = async () => {
   // get result of matches
   const country: match[] = [
-    [4, 3, 'w'], // 'France vs Argentina'
-    [2, 1, 'w'], // 'Uruguay vs Portugal'
-    [1, 1, 't'], // 'Spain vs Russia'
-    [1, 1, 't'], // 'Croatia vs Denmark'
-    [2, 0, 'w'], // 'Brazil vs Mexico'
-    [3, 2, 'w'], // 'Belgium vs Japan'
-    [1, 0, 'w'], // 'Sweden vs Switzerland'
-    [1, 1, 't'] // 'Colombia vs England'
+    // [4, 3, 'w'], // 'France vs Argentina'
+    [0, 2, 'l'], // Uruguay vs France
+    [1, 2, 'l'], // Brazil vs Belgium
+    [0, 2, 'l'], // Sweden vs England
+    [1, 1, 't'] //  Russia vs Croatia
   ]
 
   const d = await fs.readFileSync('./success.json', 'utf-8')
