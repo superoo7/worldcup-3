@@ -6,7 +6,7 @@ describe('test function', () => {
     let sampleData: postData[] = [
       {
         author: 'a',
-        reputation: 123,
+        author_reputation: 123,
         permlink: 'aaa',
         title: 'asd',
         json_metadata: '',
@@ -17,7 +17,7 @@ describe('test function', () => {
       },
       {
         author: 'a',
-        reputation: 123,
+        author_reputation: 123,
         permlink: 'aaa',
         title: 'asd',
         json_metadata: '',

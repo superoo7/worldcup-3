@@ -46,7 +46,7 @@ const checkRep: (data: postData[]) => Promise<{ violated: string[]; data: postDa
 ) => {
   let violated: string[] = []
   let nd: postData[] = data.filter(d => {
-    let rep = calcRep(d.reputation)
+    let rep = calcRep(d.author_reputation)
     if (rep < 40) {
       violated.push(d.author)
       return false

@@ -1,7 +1,7 @@
 // Type
 type postData = {
   author: string
-  reputation: number
+  author_reputation: number
   title: string
   permlink: string
   json_metadata: string
@@ -18,11 +18,6 @@ type match = (number | 'w' | 't' | 'l')[]
 
 type extractedData = match[]
 
-const country = [
-  'Uruguay vs France', // Uruguay vs France
-  'Brazil vs Belgium', // Brazil vs Belgium
-  'Sweden vs England', // Sweden vs England
-  'Russia vs Croatia' //  Russia vs Croatia
-]
+const country = ['France vs Croatia', 'Belgium vs England']
 
 export { postData, extractedData, match, country }

@@ -3,21 +3,20 @@ import * as fs from 'fs'
 
 const query = `
 SELECT
-  'https://steemit.com' + Comments.url AS link,
-  Comments.author,
-  Comments.title,
-  Comments.created,
-  Comments.last_update,
-  Comments.body,
-  Accounts.reputation
+  'https://steemit.com' + url AS link,
+  author,
+  title,
+  created,
+  last_update,
+  body,
+  author_reputation
 FROM
   Comments
-LEFT JOIN Accounts ON Comments.author = Accounts.name
 WHERE
   depth = 0 AND
-  Comments.created > '2018-07-03 21:18:12' AND
-  Comments.created < '2018-07-06 13:59:00' AND
-  Comments.last_update < '2018-07-06 13:59:00' AND
+  Comments.created > '2018-07-11 22:47:00' AND
+  Comments.created < '2018-07-14 13:59:00' AND
+  Comments.last_update < '2018-07-14 13:59:00' AND
   CONTAINS(Comments.json_metadata, 'blocktradesworldcup') AND
   CONTAINS(Comments.json_metadata, 'mypicks')
 `

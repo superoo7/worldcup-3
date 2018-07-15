@@ -50,7 +50,7 @@ const extractBody: (body: string) => extractedData = (body: string) => {
   // France vs Argentina first
   let tempChunk = body
     .toLowerCase()
-    .split(/[0-9]+[* |\t\n]+uruguay+[*| \t\n]+[v, vs, \n]+[* |\t\n]+france+[* |\t\n]+[0-9]/)[0]
+    .split(/[0-9]+[* |\t\n]+france+[*| \t\n]+[v, vs, \n]+[* |\t\n]+croatia+[* |\t\n]+[0-9]/)[0]
   let tempBody: string = body.toLowerCase().slice(tempChunk.length, body.length)
   // loop for number of country
   for (let i = 0; i < country.length; i++) {
