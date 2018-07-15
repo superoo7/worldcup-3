@@ -18,6 +18,6 @@ type match = (number | 'w' | 't' | 'l')[]
 
 type extractedData = match[]
 
-const country = ['France vs Croatia', 'Belgium vs England']
+const country = ['France vs Belgium', 'Croatia vs England']
 
 export { postData, extractedData, match, country }

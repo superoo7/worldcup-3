@@ -14,9 +14,9 @@ FROM
   Comments
 WHERE
   depth = 0 AND
-  Comments.created > '2018-07-11 22:47:00' AND
-  Comments.created < '2018-07-14 13:59:00' AND
-  Comments.last_update < '2018-07-14 13:59:00' AND
+  Comments.created > '2018-07-08 03:42:30' AND
+  Comments.created < '2018-07-10 17:59:00' AND
+  Comments.last_update < '2018-07-10 17:59:00' AND
   CONTAINS(Comments.json_metadata, 'blocktradesworldcup') AND
   CONTAINS(Comments.json_metadata, 'mypicks')
 `
