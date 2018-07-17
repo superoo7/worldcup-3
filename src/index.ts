@@ -98,8 +98,8 @@ const getWinners = async () => {
   // get result of matches
   const country: match[] = [
     // [4, 3, 'w'], // 'France vs Argentina'
-    [], // 'France vs Croatia'
-    [] // 'Belgium vs England'
+    [4, 2, 'w'], // 'France vs Croatia'
+    [2, 0, 'w'] // 'Belgium vs England'
   ]
 
   const d = await fs.readFileSync('./success.json', 'utf-8')
@@ -139,9 +139,9 @@ const generateTable = (data: postData[]) => {
 
 if (process.env.NODE === 'TEST') {
 } else {
-  main()
+  // main()
   // singlePost()
-  // getWinners()
+  getWinners()
 }
 
 export { logger, client, readFile, sendMessage }
